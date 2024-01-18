@@ -57,3 +57,5 @@ const deleteFile = asycnWrapper(async(req,res)=>{
     const deletedFile =await pool.query(query , [fileId]);
     res.status(StatusCodes.OK).json({ msg:deletedFile.rows[0] });
 })
+
+module.exports = {addFile,renameFile,moveFile,deleteFile}
