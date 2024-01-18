@@ -81,3 +81,6 @@ This is a simple file manager application built using Node.js, PostgreSQL, and A
 
     - Endpoint: DELETE /files/:fileId
     - Description: Delete a file.
+ 
+## Database Schema
+![Database Schema](./schema.png)
