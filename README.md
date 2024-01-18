@@ -34,15 +34,15 @@ This is a simple file manager application built using Node.js, PostgreSQL, and A
     Create a `.env` file in the project root and add the following variables:
 
     ```env
-    PORT=3000
+    
     PG_USER=your_postgres_user
     PG_HOST=your_postgres_host
     PG_DATABASE=your_postgres_database
     PG_PASSWORD=your_postgres_password
     PG_PORT=your_postgres_port
-    AWS_ACCESS_KEY_ID=your_aws_access_key_id
-    AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
-    AWS_REGION=your_aws_region
+    AWS_ACCESS_KEY=your_aws_access_key_id
+    AWS_SECRET_KEY=your_aws_secret_access_key
+    
     ```
 
 4. **Run the Application:**
