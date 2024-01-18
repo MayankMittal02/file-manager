@@ -72,15 +72,21 @@ This is a simple file manager application built using Node.js, PostgreSQL, and A
     - Description: Create a subfolder inside an existing folder.
 
 - **Upload Files:**
-    - Endpoint: POST /addfile/:parentFolderId
+    - Endpoint: POST files/addfile/:parentFolderId
     - Description: Upload files to the appropriate folders.
 
 - **Manage Files:**
-    - Endpoint: PUT /files/:fileId
-    - Description: Manage files, including renaming, moving, etc.
-
-    - Endpoint: DELETE /files/:fileId
+- *Rename File:*
+    - Endpoint: PUT /files/manageFiles/:fileId
+    - Description: Rename a file
+  
+- *Delete File:*
+    - Endpoint: DELETE /files/manageFiles/:fileId
     - Description: Delete a file.
+- *Move File:*
+    - Endpoint: PUT /manageFiles/:fileId/:newFolderId
+    - Description: Moves a file.
+      
  
 ## Database Schema
 ![Database Schema](./schema.png)
