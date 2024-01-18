@@ -16,15 +16,14 @@ const createFolder = async (req, res) => {
         }
 
         const sameNameQuery = `select * from folders where folder_name = $1`
-        const sameNameFolder = await pool.query(sameNameQuery , [folderName]);
+        const sameNameFolder = await pool.query(sameNameQuery, [folderName]);
 
-        if(sameNameFolder.rows.length !==0){
+        if (sameNameFolder.rows.length !== 0) {
             return res.status(409).json({ error: 'Folder with the same name already exists.' });
         }
-        
+
         const query = `insert into folders(folder_name , user_id) values ($1,$2) returning *`
         const createdFolder = await pool.query(query, [folderName, userId]);
-        // const createdFolder = await pool.query(query);
 
         res.status(201).json({ msg: createdFolder.rows[0] });
     }
@@ -34,23 +33,19 @@ const createFolder = async (req, res) => {
     }
 }
 
-const createSubFolder = async (req, res) => {
+const createSubFolder = asycnWrapper(async (req, res) => {
     const { folderName, userId } = req.body;
     const { parentFolderId } = req.params;
-    try {
-        if (!folderName) {
-            return res.status(400).json({ msg: "provide folder name" });
-        }
-        const query = 'insert into folders(folder_name , user_id , parent_folder_id) values($1,$2,$3) returning*'
-        const createdFolder = await pool.query(query, [folderName, userId, parentFolderId]);
-        res.status(201).json({ msg: createdFolder.rows[0] });
 
+    if (!folderName) {
+        return res.status(400).json({ msg: "provide folder name" });
     }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({ error: error });
-    }
-}
+    const query = 'insert into folders(folder_name , user_id , parent_folder_id) values($1,$2,$3) returning*'
+    const createdFolder = await pool.query(query, [folderName, userId, parentFolderId]);
+    res.status(201).json({ msg: createdFolder.rows[0] });
+
+
+})
 
 
 
