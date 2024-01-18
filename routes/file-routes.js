@@ -11,7 +11,7 @@ const authenticateUser = require('../middleware/authentication');
 
 router.route('/addfile/:parentFolderId').post(authenticateUser,upload.single('file'),addFile)
 router.route('/manageFiles/:fileId').put(authenticateUser ,renameFile).delete(authenticateUser , deleteFile)
-router.route('/manageFiles/:fileId/newFolderId').put(authenticateUser , moveFile)
+router.route('/manageFiles/:fileId/:newFolderId').put(authenticateUser , moveFile)
 
 module.exports = router;
 
