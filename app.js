@@ -6,8 +6,8 @@ const app = express();
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
 
-const pool = require('./connection.js')
-const s3 = require('./connection-s3.js')
+const pool = require('./config/connectiondb.js')
+const s3 = require('./config/connection-s3.js')
 
 
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const pool = require('../connection')
+const pool = require('../config/connectiondb')
 const asycnWrapper = require('../middleware/async')
 
 const addFile = asycnWrapper(async (req, res) => {

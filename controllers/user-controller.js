@@ -1,4 +1,4 @@
-const pool = require('../connection')
+const pool = require('../config/connectiondb')
 const { StatusCodes } = require('http-status-codes')
 const asycnWrapper = require('../middleware/async')
 const bcrypt = require('bcryptjs')
