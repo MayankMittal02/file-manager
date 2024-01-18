@@ -18,7 +18,7 @@ const register = asycnWrapper(async (req, res) => {
     const query = `insert into users(username , email , password) values($1,$2,$3) returning *`
     const registeredUser = await pool.query(query, [username, email, hashedPassword]);
     const user = registeredUser.rows[0]
-    const token = jwt.sign({ user_id: user.user_id }, JWT_SECRET, { expiresIn: EXPIRY_TIME });
+    const token = jwt.sign({ userId: user.user_id }, JWT_SECRET, { expiresIn: EXPIRY_TIME });
 
 
     res.status(StatusCodes.CREATED).json({ token: token });
@@ -30,7 +30,7 @@ const login = asycnWrapper(async (req, res) => {
         return res.status(StatusCodes.BAD_REQUEST).json({ msg: "provide email and password" })
     }
 
-    
+
     const existingUserQuery = `select * from users where email = $1`
     const existingUser = await pool.query(existingUserQuery, [email])
     if (existingUser.rows.length == 0) {
@@ -39,7 +39,7 @@ const login = asycnWrapper(async (req, res) => {
     const user = existingUser.rows[0];
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) return res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Invalid credentials! " });
-    const token = jwt.sign({ user_id: user.user_id }, JWT_SECRET, { expiresIn: EXPIRY_TIME });
+    const token = jwt.sign({ userId: user.user_id }, JWT_SECRET, { expiresIn: EXPIRY_TIME });
     res.status(StatusCodes.OK).json({ token: token })
 })
 
